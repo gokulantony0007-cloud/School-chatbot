@@ -1,33 +1,100 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>School Chatbot</title>
-<style>
-body { font-family: Arial; text-align: center; background: #f2f2f2; }
-input { padding: 10px; width: 80%; }
-button { padding: 10px; margin-top: 10px; }
-</style>
+  <title>Advanced School Chatbot</title>
+  <style>
+    body {
+      font-family: Arial;
+      background: #f4f6f8;
+      text-align: center;
+      padding: 20px;
+    }
+    .chatbox {
+      background: white;
+      max-width: 400px;
+      margin: auto;
+      padding: 15px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px #ccc;
+    }
+    input {
+      width: 90%;
+      padding: 10px;
+      margin-top: 10px;
+    }
+    button {
+      padding: 10px 20px;
+      margin-top: 10px;
+    }
+    .bot {
+      margin-top: 15px;
+      color: blue;
+    }
+  </style>
 </head>
 
 <body>
-<h2>🤖 School Chatbot</h2>
 
-<input id="msg" placeholder="Type your message">
-<button onclick="reply()">Send</button>
+<div class="chatbox">
+  <h2>🤖 School Chatbot</h2>
 
-<p id="bot"></p>
+  <input id="msg" placeholder="Ask me something..." />
+  <br>
+  <button onclick="reply()">Send</button>
+
+  <p class="bot" id="bot"></p>
+</div>
 
 <script>
 function reply() {
   let text = document.getElementById("msg").value.toLowerCase();
-  let response = "Sorry, I don't understand.";
+  let response = "Sorry, I don't understand. Type 'help'.";
 
-  if (text.includes("hi")) response = "Hello! How can I help?";
-  else if (text.includes("name")) response = "I am SchoolBot.";
-  else if (text.includes("bye")) response = "Goodbye!";
+  // Greetings
+  if (text.includes("hi") || text.includes("hello")) {
+    response = "Hello! How can I help you?";
 
-  document.getElementById("bot").innerText = response;
+  // Bot info
+  } else if (text.includes("your name")) {
+    response = "I am an Advanced School Chatbot.";
+
+  // Help menu
+  } else if (text.includes("help")) {
+    response = "You can ask: time, date, math, school, subjects, or say bye.";
+
+  // Time
+  } else if (text.includes("time")) {
+    response = "Current time is: " + new Date().toLocaleTimeString();
+
+  // Date
+  } else if (text.includes("date")) {
+    response = "Today's date is: " + new Date().toLocaleDateString();
+
+  // School
+  } else if (text.includes("school")) {
+    response = "School is a place where students learn knowledge and discipline.";
+
+  // Subjects
+  } else if (text.includes("physics")) {
+    response = "Physics is the study of matter, energy, and motion.";
+  } else if (text.includes("computer")) {
+    response = "Computer science deals with computers and programming.";
+  } else if (text.includes("math")) {
+    response = "Mathematics is the study of numbers and calculations.";
+    } else if (text.match(/[0-9]+\s*[\+\-\*\/]\s*[0-9]+/)) {
+    try {
+      response = "Answer is: " + eval(text);
+    } catch {
+      response = "Please enter a valid math expression.";
+    }
+
+  // Exit
+  } else if (text.includes("bye")) {
+    response = "Goodbye! Have a nice day 😊";
+  }
+document.getElementById("bot").innerText = response;
 }
 </script>
+
 </body>
 </html>
