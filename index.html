@@ -1,66 +1,27 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <title>Advanced School Chatbot</title>
-  <style>
-    body {
-      font-family: Arial;
-      background: #f4f6f8;
-      text-align: center;
-      padding: 20px;
-    }
-    .chatbox {
-      background: white;
-      max-width: 400px;
-      margin: auto;
-      padding: 15px;
-      border-radius: 10px;
-      box-shadow: 0 0 10px #ccc;
-    }
-    input {
-      width: 90%;
-      padding: 10px;
-      margin-top: 10px;
-    }
-    button {
-      padding: 10px 20px;
-      margin-top: 10px;
-    }
-    .bot {
-      margin-top: 15px;
-      color: blue;
-    }
-  </style>
-</head>
-
-<body>
-
-<div class="chatbox">
-  <h2>🤖 School Chatbot</h2>
-
-  <input id="msg" placeholder="Ask me something..." />
-  <br>
-  <button onclick="reply()">Send</button>
-
-  <p class="bot" id="bot"></p>
-</div>
-
 <script>
 function reply() {
   let text = document.getElementById("msg").value.toLowerCase();
   let response = "Sorry, I don't understand. Type 'help'.";
 
-  // Greetings
+  // Greetings (hi or hello)
   if (text.includes("hi") || text.includes("hello")) {
     response = "Hello! How can I help you?";
 
-  // Bot info
+  // Who are you
+  } else if (
+    text.includes("who are you") ||
+    text.includes("who r u") ||
+    text.includes("what are you")
+  ) {
+    response = "I am a rule-based chatbot.";
+
+  // Bot name
   } else if (text.includes("your name")) {
     response = "I am an Advanced School Chatbot.";
 
-  // Help menu
+  // Help
   } else if (text.includes("help")) {
-    response = "You can ask: time, date, math, school, subjects, or say bye.";
+    response = "You can ask about school, subjects, time, date, or simple math.";
 
   // Time
   } else if (text.includes("time")) {
@@ -70,18 +31,16 @@ function reply() {
   } else if (text.includes("date")) {
     response = "Today's date is: " + new Date().toLocaleDateString();
 
-  // School
-  } else if (text.includes("school")) {
-    response = "School is a place where students learn knowledge and discipline.";
-
   // Subjects
   } else if (text.includes("physics")) {
     response = "Physics is the study of matter, energy, and motion.";
   } else if (text.includes("computer")) {
     response = "Computer science deals with computers and programming.";
   } else if (text.includes("math")) {
-    response = "Mathematics is the study of numbers and calculations.";
-    } else if (text.match(/[0-9]+\s*[\+\-\*\/]\s*[0-9]+/)) {
+    response = "Mathematics is the study of numbers.";
+
+  // Simple math calculation
+  } else if (text.match(/[0-9]+\s*[\+\-\*\/]\s*[0-9]+/)) {
     try {
       response = "Answer is: " + eval(text);
     } catch {
@@ -92,9 +51,7 @@ function reply() {
   } else if (text.includes("bye")) {
     response = "Goodbye! Have a nice day 😊";
   }
-document.getElementById("bot").innerText = response;
-}
-</script>
 
-</body>
-</html>
+  document.getElementById("bot").innerText = response;
+}
+</script>   
